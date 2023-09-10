@@ -1,5 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
+import Class from "@/components/classCard";
+import { humanReadableWeekday } from "@/constant/convert";
+import { timetable } from "@/constant/data";
 import dayjs from "dayjs";
 import weekday from "dayjs/plugin/weekday";
 import weekOfYear from "dayjs/plugin/weekOfYear";
@@ -7,172 +11,6 @@ import { useEffect, useState } from "react";
 import DatePicker from "tailwind-datepicker-react";
 dayjs.extend(weekday);
 dayjs.extend(weekOfYear);
-
-interface TimetableElement {
-  subject: string;
-  teacher: string;
-  auditory: string;
-  id: number;
-  // 1: Числитель, 2: Знаменатель, 0: Любая
-  variable: 1 | 2 | 0;
-}
-
-const humanReadableWeekday = {
-  1: "Понедельник",
-  2: "Вторник",
-  3: "Среда",
-  4: "Четверг",
-  5: "Пятница",
-  6: "Суббота",
-  7: "Воскресенье",
-};
-
-const idToTime = {
-  0: { startTime: "9:55", endTime: "10:45" },
-  1: { startTime: "9:00", endTime: "10:45" },
-  2: { startTime: "10:55", endTime: "12:40" },
-  3: { startTime: "13:10", endTime: "14:55" },
-  4: { startTime: "15:05", endTime: "16:50" },
-};
-
-const data: TimetableElement[][] = [
-  [
-    {
-      subject: "ИКТ",
-      teacher: "Кан О. А.",
-      auditory: "Гл.350",
-      id: 1,
-      variable: 1,
-    },
-    {
-      subject: "Математика",
-      teacher: "Журов В. В.",
-      auditory: "1к314",
-      id: 2,
-      variable: 0,
-    },
-  ],
-  [
-    {
-      subject: "Английский",
-      teacher: "Питиримова Т. В.",
-      auditory: "1к417",
-      id: 1,
-      variable: 2,
-    },
-    {
-      subject: "Физ-ра",
-      teacher: "Кужахметов С. Б.",
-      auditory: "-",
-      id: 2,
-      variable: 0,
-    },
-    {
-      subject: "История Казахстана",
-      teacher: "Темиргалиев К. А.",
-      auditory: "1к230",
-      id: 3,
-      variable: 0,
-    },
-  ],
-  [
-    {
-      subject: "Кураторский Час",
-      teacher: "Головачёва В.Н.",
-      auditory: "Гл.300д",
-      id: 0,
-      variable: 0,
-    },
-
-    {
-      subject: "Казахский",
-      teacher: "Конурова Н. А.",
-      auditory: "1к324",
-      id: 2,
-      variable: 0,
-    },
-    {
-      subject: "ИКТ",
-      teacher: "Дуганова Г. К.",
-      auditory: "1к255",
-      id: 3,
-      variable: 0,
-    },
-  ],
-  [
-    {
-      subject: "Математика",
-      teacher: "Журов В. В.",
-      auditory: "Гл.350",
-      id: 1,
-      variable: 1,
-    },
-    {
-      subject: "Английский",
-      teacher: "Питиримова Т. В.",
-      auditory: "1к417",
-      id: 2,
-      variable: 0,
-    },
-  ],
-  [
-    {
-      subject: "Казахский",
-      teacher: "Конурова Н. А.",
-      auditory: "1к324",
-      id: 2,
-      variable: 1,
-    },
-    {
-      subject: "Физ-ра",
-      teacher: "Кужахметов С. Б.",
-      auditory: "-",
-      id: 3,
-      variable: 0,
-    },
-    {
-      subject: "История Казахстана",
-      teacher: "Амерханова Ж. Б.",
-      auditory: "Гл.352",
-      id: 4,
-      variable: 2,
-    },
-  ],
-];
-
-function Class({
-  auditory,
-  subject,
-  teacher,
-  id,
-}: TimetableElement & { id: number }) {
-  const color = {
-    1: "bg-red-500",
-    2: "bg-orange-500",
-    3: "bg-yellow-500",
-    4: "bg-green-500",
-  };
-  const startTime = idToTime[id as keyof typeof idToTime].startTime;
-  const endTime = idToTime[id as keyof typeof idToTime].endTime;
-  if (id === 0) id = 1;
-  return (
-    <div
-      className={`${
-        color[id as keyof typeof color]
-      } flex items-center p-4 gap-4 rounded `}
-    >
-      <p>{id}</p>
-      <div className="flex flex-col gap-1 text-sm">
-        <p>{startTime}</p>
-        <p>{endTime}</p>
-      </div>
-      <div className="flex flex-col">
-        <p className="font-bold">{subject}</p>
-        <p className="text-gray-200">{auditory}</p>
-      </div>
-    </div>
-  );
-}
 
 export default function Home() {
   const [show, setShow] = useState<boolean>(false);
@@ -283,7 +121,7 @@ export default function Home() {
         </div>
         <div className="flex flex-col gap-2">
           {currentWeekday < 6 ? (
-            data[currentWeekday - 1]
+            timetable[currentWeekday - 1]
               .filter((item) => {
                 if (!(item.variable === weekType())) return item;
               })
