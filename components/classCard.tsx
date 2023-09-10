@@ -1,7 +1,9 @@
+"use client";
 import { idToTime } from "@/constant/convert";
 import { TimetableElement } from "@/types/timetable";
 import Timer from "./timer";
 import dayjs from "dayjs";
+import { useEffect, useState } from "react";
 
 export default function Class({
   auditory,
@@ -9,6 +11,7 @@ export default function Class({
   teacher,
   id,
 }: TimetableElement & { id: number }) {
+  const [now, setNow] = useState<boolean>(false);
   const color = {
     1: "bg-red-500",
     2: "bg-orange-500",
@@ -29,17 +32,26 @@ export default function Class({
       +endTime.split(":")[1],
     ];
     const [currentHour, currentMinute] = [dayjs().hour(), dayjs().minute()];
-
     if (
       currentHour > startHour &&
       currentMinute < endMinute &&
       currentHour <= endHour
     ) {
-      return true;
-    } else if (currentHour === startHour && currentMinute > startMinute) {
-      return true;
+      setNow(true);
+    } else if (currentHour === startHour && currentMinute >= startMinute) {
+      setNow(true);
+    } else {
+      setNow(false);
     }
   };
+
+  useEffect(() => {
+    const updater = setInterval(() => {
+      isNow();
+    }, 1000);
+
+    return () => clearInterval(updater);
+  }, []);
 
   return (
     <div
@@ -56,7 +68,7 @@ export default function Class({
         <p className="font-bold">{subject}</p>
         <p className="text-gray-200">{auditory}</p>
       </div>
-      {isNow() && <Timer endTime={endTime} />}
+      {now && <Timer endTime={endTime} />}
     </div>
   );
 }
