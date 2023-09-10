@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import weekday from "dayjs/plugin/weekday";
 import weekOfYear from "dayjs/plugin/weekOfYear";
 import { useEffect, useState } from "react";
+import DatePicker from "tailwind-datepicker-react";
 dayjs.extend(weekday);
 dayjs.extend(weekOfYear);
 
@@ -174,6 +175,7 @@ function Class({
 }
 
 export default function Home() {
+  const [show, setShow] = useState<boolean>(false);
   const [day, setDay] = useState(dayjs());
   const getWeekday = () => {
     let _weekday = day.weekday();
@@ -217,16 +219,47 @@ export default function Home() {
               d="M15.75 19.5L8.25 12l7.5-7.5"
             />
           </svg>
-          <div className="flex flex-col gap-1 items-center pointer-events-none select-none ">
-            <p className="font-semibold">
-              {
-                humanReadableWeekday[
-                  currentWeekday as keyof typeof humanReadableWeekday
-                ]
-              }
-            </p>
-            <p className="text-sm">{day.toDate().toLocaleDateString()}</p>
-          </div>
+          <DatePicker
+            options={{
+              minDate: new Date("2020-01-01"),
+              maxDate: new Date("2029-01-01"),
+              clearBtn: false,
+              todayBtn: false,
+              autoHide: true,
+              datepickerClassNames:
+                "top-18 left-1/2 -translate-x-1/2 border border-white rounded-md",
+              theme: {
+                background: "bg-black dark:bg-black",
+                todayBtn: "",
+                clearBtn: "",
+                icons: "",
+                text: "",
+                disabledText: "bg-gray-800 rounded-none pointer-events-none",
+                input: "dark:bg-transparent",
+                inputIcon: "",
+                selected: "",
+              },
+              language: "ru",
+              defaultDate: day.toDate(),
+            }}
+            show={show}
+            onChange={(selected) => setDay(dayjs(selected))}
+            setShow={() => setShow((prev) => !prev)}
+          >
+            <div
+              className="flex flex-col gap-1 items-center select-none cursor-pointer w-2/3 mx-auto rounded-md"
+              onClick={() => setShow((prev) => !prev)}
+            >
+              <p className="font-semibold">
+                {
+                  humanReadableWeekday[
+                    currentWeekday as keyof typeof humanReadableWeekday
+                  ]
+                }
+              </p>
+              <p className="text-sm">{day.toDate().toLocaleDateString()}</p>
+            </div>
+          </DatePicker>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
