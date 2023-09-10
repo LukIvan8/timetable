@@ -201,7 +201,7 @@ export default function Home() {
   return (
     <main className=" min-h-screen ">
       <div className="sm:w-[640px] sm:mx-auto flex flex-col">
-        <div className="flex w-full  self-center justify-between items-center p-4 gap-5">
+        <div className="flex w-full  self-center justify-between items-center p-4 gap-5 ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -227,7 +227,7 @@ export default function Home() {
               todayBtn: false,
               autoHide: true,
               datepickerClassNames:
-                "top-18 left-1/2 -translate-x-1/2 border border-white rounded-md",
+                "top-18 left-1/2 -translate-x-1/2 border border-white rounded-b-md border-t-0",
               theme: {
                 background: "bg-black dark:bg-black",
                 todayBtn: "",
@@ -247,7 +247,10 @@ export default function Home() {
             setShow={() => setShow((prev) => !prev)}
           >
             <div
-              className="flex flex-col gap-1 items-center select-none cursor-pointer w-2/3 mx-auto rounded-md"
+              className={`flex flex-col gap-1 h-14  items-center select-none cursor-pointer mx-auto sm:w-[298px] ${
+                show &&
+                "sm:border sm:border-white sm:rounded-t-md sm:border-b-0"
+              } `}
               onClick={() => setShow((prev) => !prev)}
             >
               <p className="font-semibold">
