@@ -144,9 +144,7 @@ function Class({
   subject,
   teacher,
   id,
-  // Относительное айди говорит о том какая пара по счету
-  relativeId,
-}: TimetableElement & { id: number; relativeId: number }) {
+}: TimetableElement & { id: number }) {
   const color = {
     1: "bg-red-500",
     2: "bg-orange-500",
@@ -254,9 +252,7 @@ export default function Home() {
                 if (!(item.variable === weekType())) return item;
               })
               .map((item, id) => {
-                return (
-                  <Class {...item} key={id} id={item.id} relativeId={id + 1} />
-                );
+                return <Class {...item} key={id} id={item.id} />;
               })
           ) : (
             <div className="self-center text-3xl font-bold">Выходной 🎊</div>
