@@ -21,19 +21,76 @@ export default function Home() {
     return _weekday;
   };
   const [currentWeekday, setWeekday] = useState(getWeekday());
+  const [openControlsId, setOpenControlsId] = useState<null | string>(null);
 
-  const weekType = () => {
-    const _week = dayjs(
-      dayjs(day.toDate().toDateString()).format("YYYY-MM-DD")
+  const weekType = (date: dayjs.Dayjs) => {
+    const week = dayjs(
+      dayjs(date.toDate().toDateString()).format("YYYY-MM-DD")
     ).week();
-    if (_week % 2 === 0) {
+    if (week % 2 === 0) {
       return 2;
     }
     return 1;
   };
 
+  const findNextClass = (currentDate: dayjs.Dayjs, subject: string) => {
+    let counter = 0;
+    let updatedDate = currentDate;
+    let foundNext = false;
+    while (counter <= 14) {
+      updatedDate = updatedDate.add(1, "day");
+      counter = counter + 1;
+      let weekday = updatedDate.weekday();
+      if (weekday === 0) weekday = 7;
+      if (weekday > 5) continue;
+      timetable[weekday - 1].forEach((item) => {
+        if (
+          item.subject === subject &&
+          weekType(updatedDate) !== item.variable
+        ) {
+          setDay(updatedDate);
+          foundNext = true;
+          return;
+        }
+      });
+      if (foundNext) break;
+    }
+  };
+  const findPrevClass = (currentDate: dayjs.Dayjs, subject: string) => {
+    let counter = 0;
+    let updatedDate = currentDate;
+    let foundNext = false;
+    while (counter <= 14) {
+      updatedDate = updatedDate.subtract(1, "day");
+      counter = counter + 1;
+      let weekday = updatedDate.weekday();
+      if (weekday === 0) weekday = 7;
+      if (weekday > 5) continue;
+      timetable[weekday - 1].forEach((item) => {
+        if (
+          item.subject === subject &&
+          weekType(updatedDate) !== item.variable
+        ) {
+          setDay(updatedDate);
+          foundNext = true;
+          return;
+        }
+      });
+      if (foundNext) break;
+    }
+  };
+
+  const toggleControls = (id: string) => {
+    if (openControlsId === id) {
+      setOpenControlsId(null);
+    } else {
+      setOpenControlsId(id);
+    }
+  };
+
   useEffect(() => {
     setWeekday(getWeekday());
+    if (openControlsId) toggleControls(openControlsId);
   }, [day]);
 
   return (
@@ -63,9 +120,9 @@ export default function Home() {
               maxDate: new Date("2029-01-01"),
               clearBtn: false,
               todayBtn: false,
-              autoHide: true,
+              autoHide: false,
               datepickerClassNames:
-                "top-18 left-1/2 -translate-x-1/2 border border-white rounded-b-md border-t-0",
+                "top-18 left-1/2 -translate-x-1/2 border border-white rounded-b-md border-t-0 z-[100] absolute",
               theme: {
                 background: "bg-black dark:bg-black",
                 todayBtn: "",
@@ -123,10 +180,22 @@ export default function Home() {
           {currentWeekday < 6 ? (
             timetable[currentWeekday - 1]
               .filter((item) => {
-                if (!(item.variable === weekType())) return item;
+                if (!(item.variable === weekType(day))) return item;
               })
               .map((item, id) => {
-                return <Class {...item} key={id} id={item.id} />;
+                const uniqueKey = `${currentWeekday - 1}-${id}`;
+                return (
+                  <Class
+                    {...item}
+                    key={uniqueKey}
+                    id={item.id}
+                    isOpen={openControlsId === uniqueKey}
+                    toggleControls={() => toggleControls(uniqueKey)}
+                    findNextClass={findNextClass}
+                    findPrevClass={findPrevClass}
+                    day={day}
+                  />
+                );
               })
           ) : (
             <div className="self-center text-3xl font-bold">Выходной 🎊</div>
