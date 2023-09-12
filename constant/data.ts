@@ -21,7 +21,7 @@ export const timetable: TimetableElement[][] = [
     {
       subject: "Английский",
       teacher: "Питиримова Т. В.",
-      auditory: "1к417",
+      auditory: "1к415 / 1к417",
       id: 1,
       variable: 2,
     },
@@ -52,7 +52,7 @@ export const timetable: TimetableElement[][] = [
     {
       subject: "Казахский",
       teacher: "Конурова Н. А.",
-      auditory: "1к324",
+      auditory: "1к324 / 1к326",
       id: 2,
       variable: 0,
     },
@@ -75,7 +75,7 @@ export const timetable: TimetableElement[][] = [
     {
       subject: "Английский",
       teacher: "Питиримова Т. В.",
-      auditory: "1к417",
+      auditory: "1к415/1к417",
       id: 2,
       variable: 0,
     },
@@ -84,7 +84,7 @@ export const timetable: TimetableElement[][] = [
     {
       subject: "Казахский",
       teacher: "Конурова Н. А.",
-      auditory: "1к324",
+      auditory: "1к324 / 1к326",
       id: 2,
       variable: 1,
     },
