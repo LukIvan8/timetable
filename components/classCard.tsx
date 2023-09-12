@@ -109,7 +109,8 @@ export default function Class({
         </div>
         <div className="flex flex-col grow">
           <p className="font-bold">{subject}</p>
-          <p className="text-gray-200">{auditory}</p>
+          <p className="text-gray-200 text-sm">{auditory}</p>
+          <p className="text-gray-200 text-sm">{teacher}</p>
         </div>
         {now && <Timer endTime={endTime} />}
       </div>
