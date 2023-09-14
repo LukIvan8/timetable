@@ -3,7 +3,8 @@ import { idToTime } from "@/constant/convert";
 import { TimetableElement } from "@/types/timetable";
 import Timer from "./timer";
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { redirect } from "next/navigation";
 
 export default function Class({
   auditory,
@@ -23,6 +24,8 @@ export default function Class({
   isOpen: boolean;
   toggleControls: () => void;
 }) {
+  const [teacherRef, setTeacher] = useState<string>(teacher);
+  const [auditoryRef, setAuditory] = useState<string>(auditory);
   const [now, setNow] = useState<boolean>(false);
   const color = {
     1: "red",
@@ -73,16 +76,18 @@ export default function Class({
       +endTime.split(":")[1],
     ];
     const [currentHour, currentMinute] = [dayjs().hour(), dayjs().minute()];
-    if (
-      currentHour > startHour &&
-      currentMinute < endMinute &&
-      currentHour <= endHour
-    ) {
-      setNow(true);
-    } else if (currentHour === startHour && currentMinute >= startMinute) {
-      setNow(true);
-    } else {
-      setNow(false);
+    if (dayjs().date() === day.date()) {
+      if (
+        currentHour > startHour &&
+        currentMinute < endMinute &&
+        currentHour <= endHour
+      ) {
+        setNow(true);
+      } else if (currentHour === startHour && currentMinute >= startMinute) {
+        setNow(true);
+      } else {
+        setNow(false);
+      }
     }
   };
 
@@ -109,13 +114,14 @@ export default function Class({
         </div>
         <div className="flex flex-col grow">
           <p className="font-bold">{subject}</p>
-          <p className="text-gray-200 text-sm">{auditory}</p>
-          <p className="text-gray-200 text-sm">{teacher}</p>
+          <p className="text-gray-200 text-sm">
+            {auditoryRef} | {teacherRef}
+          </p>
         </div>
         {now && <Timer endTime={endTime} />}
       </div>
       <div
-        className={`${isOpen ? "top-full" : " top-1/2"} ${
+        className={`${isOpen ? "top-full" : " top-1/3"} ${
           borderColor[id as keyof typeof color]
         } absolute   w-full left-0 bg-black border rounded-b border-t-0 transition-[top] ${zControls}`}
       >
