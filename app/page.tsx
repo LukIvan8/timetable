@@ -10,6 +10,7 @@ import weekOfYear from "dayjs/plugin/weekOfYear";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useSwipeable } from "react-swipeable";
 import DatePicker from "tailwind-datepicker-react";
 dayjs.extend(weekday);
 dayjs.extend(weekOfYear);
@@ -123,8 +124,20 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [day]);
 
+  const swipeHandle = useSwipeable({
+    onSwipedLeft: () => {
+      setDay((prev) => prev.add(1, "day"));
+    },
+    onSwipedRight: () => {
+      setDay((prev) => prev.subtract(1, "day"));
+    },
+    preventScrollOnSwipe: true,
+    trackMouse: true,
+    swipeDuration: 500,
+  });
+
   return (
-    <main className=" min-h-screen ">
+    <main {...swipeHandle} className=" min-h-screen ">
       <div className="sm:w-[640px] sm:mx-auto flex flex-col">
         <div className="flex w-full  self-center justify-between items-center p-4 gap-5 ">
           <svg
@@ -185,7 +198,9 @@ export default function Home() {
                   ]
                 }
               </p>
-              <p className="text-sm">{day.toDate().toLocaleDateString()}</p>
+              <p className="text-sm" suppressHydrationWarning>
+                {day.toDate().toLocaleDateString()}
+              </p>
             </div>
           </DatePicker>
           <svg
