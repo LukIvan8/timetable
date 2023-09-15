@@ -137,9 +137,9 @@ export default function Home() {
   });
 
   return (
-    <main {...swipeHandle} className=" min-h-screen ">
-      <div className="sm:w-[640px] sm:mx-auto flex flex-col">
-        <div className="flex w-full  self-center justify-between items-center p-4 gap-5 ">
+    <main className=" min-h-screen ">
+      <div {...swipeHandle} className="sm:w-[640px] sm:mx-auto min-h-screen">
+        <div className="flex w-full  self-center justify-between items-center p-4 gap-5  ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -221,7 +221,7 @@ export default function Home() {
             />
           </svg>
         </div>
-        <div className="flex flex-col gap-2">
+        <div {...swipeHandle} className="flex flex-col gap-2 ">
           {currentWeekday < 6 ? (
             timetablepls ? (
               timetablepls[currentWeekday - 1]
