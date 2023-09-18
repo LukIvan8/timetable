@@ -114,15 +114,6 @@ export default function Class({
         } flex items-center p-4 gap-4 relative cursor-pointer ${zCard}`}
         onClick={() => toggleControls()}
       >
-        <div
-          className={`absolute left-0 w-[76px] transition-all  ${
-            typeToColor[type]
-          } ${
-            isOpen ? "-top-7 h-7" : "-top-2 h-2"
-          } rotate-90 origin-bottom-left text-sm`}
-        >
-          {isOpen && <p className="text-center">{typeToHuman[type]}</p>}
-        </div>
         <p>{id}</p>
         <div className="flex flex-col gap-1 text-sm">
           <p>{startTime}</p>
@@ -143,7 +134,7 @@ export default function Class({
       >
         <div className="flex justify-between p-2">
           <p
-            className="flex cursor-pointer"
+            className="flex cursor-pointer flex-grow"
             onClick={() => findPrevClass(day, subject)}
           >
             <svg
@@ -160,13 +151,12 @@ export default function Class({
                 d="M15.75 19.5L8.25 12l7.5-7.5"
               />
             </svg>
-            Предыдущая
           </p>
+          <p className="font-bold">{typeToHuman[type]}</p>
           <p
-            className="flex cursor-pointer"
+            className="flex cursor-pointer flex-grow justify-end"
             onClick={() => findNextClass(day, subject)}
           >
-            Следующая
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
