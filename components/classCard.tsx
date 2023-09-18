@@ -36,7 +36,7 @@ export default function Class({
   };
   const typeToColor = {
     lection: "bg-gray-200 text-gray-900",
-    seminar: "bg-gray-900",
+    seminar: "bg-stone-700",
     kurh: "bg-gray-200 text-black",
     lab: "bg-green-800",
   } as const;
