@@ -240,6 +240,7 @@ export default function Home() {
                       findNextClass={findNextClass}
                       findPrevClass={findPrevClass}
                       day={day}
+                      type={item.type}
                     />
                   );
                 })

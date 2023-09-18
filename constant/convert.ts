@@ -15,3 +15,10 @@ export const idToTime = {
   3: { startTime: "13:10", endTime: "14:55" },
   4: { startTime: "15:05", endTime: "16:50" },
 };
+
+export const typeToHuman = {
+  lection: "Лекция",
+  seminar: "Семинар",
+  kurh: "КЧ",
+  lab: "Лаб.",
+};

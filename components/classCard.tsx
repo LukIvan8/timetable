@@ -1,5 +1,5 @@
 "use client";
-import { idToTime } from "@/constant/convert";
+import { idToTime, typeToHuman } from "@/constant/convert";
 import { TimetableElement } from "@/types/timetable";
 import Timer from "./timer";
 import dayjs from "dayjs";
@@ -12,6 +12,7 @@ export default function Class({
   teacher,
   id,
   day,
+  type,
   isOpen,
   findNextClass,
   findPrevClass,
@@ -33,6 +34,12 @@ export default function Class({
     3: "yellow",
     4: "green",
   };
+  const typeToColor = {
+    lection: "bg-gray-200 text-gray-900",
+    seminar: "bg-gray-900",
+    kurh: "bg-gray-200 text-black",
+    lab: "bg-green-800",
+  } as const;
   // Почему то tailwind не подхватывает наличие этих классов без этого
   const bgColor = {
     1: "bg-red-500",
@@ -104,9 +111,18 @@ export default function Class({
       <div
         className={`${bgColor[id as keyof typeof color]} ${
           isOpen ? "rounded-t" : "rounded"
-        } flex items-center p-4 gap-4 relative cursor-pointer ${zCard} `}
+        } flex items-center p-4 gap-4 relative cursor-pointer ${zCard}`}
         onClick={() => toggleControls()}
       >
+        <div
+          className={`absolute left-0 w-[76px] transition-all  ${
+            typeToColor[type]
+          } ${
+            isOpen ? "-top-7 h-7" : "-top-2 h-2"
+          } rotate-90 origin-bottom-left text-sm`}
+        >
+          {isOpen && <p className="text-center">{typeToHuman[type]}</p>}
+        </div>
         <p>{id}</p>
         <div className="flex flex-col gap-1 text-sm">
           <p>{startTime}</p>

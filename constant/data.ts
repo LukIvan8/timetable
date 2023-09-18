@@ -8,6 +8,7 @@ export const timetable: TimetableElement[][] = [
       auditory: "Гл.350",
       id: 1,
       variable: 1,
+      type: "lection",
     },
     {
       subject: "Математика",
@@ -15,6 +16,7 @@ export const timetable: TimetableElement[][] = [
       auditory: "1к314",
       id: 2,
       variable: 0,
+      type: "seminar",
     },
   ],
   [
@@ -24,6 +26,7 @@ export const timetable: TimetableElement[][] = [
       auditory: "1к415/1к417",
       id: 1,
       variable: 2,
+      type: "seminar",
     },
     {
       subject: "Физ-ра",
@@ -31,6 +34,7 @@ export const timetable: TimetableElement[][] = [
       auditory: "-",
       id: 2,
       variable: 0,
+      type: "seminar",
     },
     {
       subject: "История Казахстана",
@@ -38,6 +42,7 @@ export const timetable: TimetableElement[][] = [
       auditory: "1к230",
       id: 3,
       variable: 0,
+      type: "seminar",
     },
   ],
   [
@@ -47,14 +52,15 @@ export const timetable: TimetableElement[][] = [
       auditory: "Гл.300д",
       id: 0,
       variable: 0,
+      type: "seminar",
     },
-
     {
       subject: "Казахский",
       teacher: "Конурова Н.А./Оспангалиева М.Т.",
       auditory: "1к324/1к326",
       id: 2,
       variable: 0,
+      type: "seminar",
     },
     {
       subject: "ИКТ",
@@ -62,6 +68,7 @@ export const timetable: TimetableElement[][] = [
       auditory: "1к253/1к255",
       id: 3,
       variable: 0,
+      type: "lab",
     },
   ],
   [
@@ -71,6 +78,7 @@ export const timetable: TimetableElement[][] = [
       auditory: "Гл.350",
       id: 1,
       variable: 1,
+      type: "lection",
     },
     {
       subject: "Английский",
@@ -78,6 +86,7 @@ export const timetable: TimetableElement[][] = [
       auditory: "1к415 / 1к417",
       id: 2,
       variable: 0,
+      type: "seminar",
     },
   ],
   [
@@ -87,6 +96,7 @@ export const timetable: TimetableElement[][] = [
       auditory: "1к324/1к326",
       id: 2,
       variable: 1,
+      type: "seminar",
     },
     {
       subject: "Физ-ра",
@@ -94,6 +104,7 @@ export const timetable: TimetableElement[][] = [
       auditory: "-",
       id: 3,
       variable: 0,
+      type: "seminar",
     },
     {
       subject: "История Казахстана",
@@ -101,6 +112,7 @@ export const timetable: TimetableElement[][] = [
       auditory: "Гл.352",
       id: 4,
       variable: 2,
+      type: "lection",
     },
   ],
 ];
