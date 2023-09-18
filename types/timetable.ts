@@ -5,5 +5,5 @@ export interface TimetableElement {
   id: number;
   // 1: Числитель, 2: Знаменатель, 0: Любая
   variable: 1 | 2 | 0;
-  type: "seminar" | "lection" | "kurh" | "lab";
+  type: "seminar" | "lection" | "lab";
 }

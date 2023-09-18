@@ -58,16 +58,16 @@ export default function Class({
   if (id === 0) id = 1;
 
   const idToZCard = {
-    1: "z-[80]",
-    2: "z-[60]",
-    3: "z-[40]",
-    4: "z-[20]",
+    1: "z-[8]",
+    2: "z-[6]",
+    3: "z-[4]",
+    4: "z-[2]",
   };
   const idToZCtrl = {
-    1: "z-[70]",
-    2: "z-[50]",
-    3: "z-[30]",
-    4: "z-[10]",
+    1: "z-[7]",
+    2: "z-[5]",
+    3: "z-[3]",
+    4: "z-[1]",
   };
 
   const zCard = idToZCard[id as keyof typeof idToZCard];

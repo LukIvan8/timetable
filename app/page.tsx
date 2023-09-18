@@ -1,9 +1,16 @@
 "use client";
 
 import Class from "@/components/classCard";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { humanReadableWeekday } from "@/constant/convert";
 import { timetable } from "@/constant/data";
 import { TimetableElement } from "@/types/timetable";
+import ru from "date-fns/locale/ru";
 import dayjs from "dayjs";
 import weekday from "dayjs/plugin/weekday";
 import weekOfYear from "dayjs/plugin/weekOfYear";
@@ -157,7 +164,38 @@ export default function Home() {
               d="M15.75 19.5L8.25 12l7.5-7.5"
             />
           </svg>
-          <DatePicker
+          <Popover>
+            <PopoverTrigger asChild>
+              <div
+                className={`flex flex-col gap-1 h-14  items-center select-none cursor-pointer mx-auto sm:w-[298px] ${
+                  show &&
+                  "sm:border sm:border-white sm:rounded-t-md sm:border-b-0"
+                } `}
+                onClick={() => setShow((prev) => !prev)}
+              >
+                <p className="font-semibold">
+                  {
+                    humanReadableWeekday[
+                      currentWeekday as keyof typeof humanReadableWeekday
+                    ]
+                  }
+                </p>
+                <p className="text-sm" suppressHydrationWarning>
+                  {day.toDate().toLocaleDateString()}
+                </p>
+              </div>
+            </PopoverTrigger>
+            <PopoverContent className="dark">
+              <Calendar
+                locale={ru}
+                mode="single"
+                selected={day.toDate()}
+                className="z-[99]"
+                onSelect={(selected) => setDay(dayjs(selected))}
+              />
+            </PopoverContent>
+          </Popover>
+          {/* <DatePicker
             options={{
               minDate: new Date("2020-01-01"),
               maxDate: new Date("2029-01-01"),
@@ -202,7 +240,7 @@ export default function Home() {
                 {day.toDate().toLocaleDateString()}
               </p>
             </div>
-          </DatePicker>
+          </DatePicker> */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
