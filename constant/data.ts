@@ -23,7 +23,7 @@ export const timetable: TimetableElement[][] = [
     {
       subject: "Английский",
       teacher: "Богданова А.А./Питиримова Т.В.",
-      auditory: "1к415/1к417",
+      auditory: "1к415/1к423",
       id: 1,
       variable: 2,
       type: "seminar",
