@@ -195,52 +195,6 @@ export default function Home() {
               />
             </PopoverContent>
           </Popover>
-          {/* <DatePicker
-            options={{
-              minDate: new Date("2020-01-01"),
-              maxDate: new Date("2029-01-01"),
-              clearBtn: false,
-              todayBtn: false,
-              autoHide: false,
-              datepickerClassNames:
-                "top-18 left-1/2 -translate-x-1/2 border border-white rounded-b-md border-t-0 z-[100] absolute",
-              theme: {
-                background: "bg-black dark:bg-black",
-                todayBtn: "",
-                clearBtn: "",
-                icons: "",
-                text: "",
-                disabledText: "bg-gray-800 rounded-none pointer-events-none",
-                input: "dark:bg-transparent",
-                inputIcon: "",
-                selected: "",
-              },
-              language: "ru",
-              defaultDate: day.toDate(),
-            }}
-            show={show}
-            onChange={(selected) => setDay(dayjs(selected))}
-            setShow={() => setShow((prev) => !prev)}
-          >
-            <div
-              className={`flex flex-col gap-1 h-14  items-center select-none cursor-pointer mx-auto sm:w-[298px] ${
-                show &&
-                "sm:border sm:border-white sm:rounded-t-md sm:border-b-0"
-              } `}
-              onClick={() => setShow((prev) => !prev)}
-            >
-              <p className="font-semibold">
-                {
-                  humanReadableWeekday[
-                    currentWeekday as keyof typeof humanReadableWeekday
-                  ]
-                }
-              </p>
-              <p className="text-sm" suppressHydrationWarning>
-                {day.toDate().toLocaleDateString()}
-              </p>
-            </div>
-          </DatePicker> */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
