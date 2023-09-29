@@ -92,6 +92,8 @@ export default function Class({
         setNow(true);
       } else if (currentHour === startHour && currentMinute >= startMinute) {
         setNow(true);
+      } else if (currentHour > startHour && currentHour < startHour) {
+        setNow(true);
       } else {
         setNow(false);
       }
