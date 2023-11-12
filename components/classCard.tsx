@@ -84,17 +84,19 @@ export default function Class({
     ];
     const [currentHour, currentMinute] = [dayjs().hour(), dayjs().minute()];
     if (dayjs().date() === day.date()) {
+      const appointmentStartTime = startHour * 60 + startMinute;
+      const appointmentEndTime = endHour * 60 + endMinute;
+      const currentTime = currentHour * 60 + currentMinute;
       if (
-        currentHour > startHour &&
-        currentMinute < endMinute &&
-        currentHour <= endHour
+        currentTime >= appointmentStartTime &&
+        currentTime <= appointmentEndTime
       ) {
-        setNow(true);
-      } else if (currentHour === startHour && currentMinute >= startMinute) {
         setNow(true);
       } else {
         setNow(false);
       }
+    } else {
+      setNow(false);
     }
   };
 
