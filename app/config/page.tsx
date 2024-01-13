@@ -26,27 +26,25 @@ export default function ConfigLocalstorage() {
           <p className="font-semibold text-xl">Английский</p>
           <div>
             <div className="form-control">
-              <label className="label cursor-pointer gap-2 flex">
+              <label className="label gap-2 cursor-pointer justify-normal">
                 <input
                   type="radio"
                   name="english"
-                  value={0}
-                  className="radio"
-                  checked
+                  value={1}
+                  className="radio checked:bg-red-500"
                 />
                 <span className="label-text">Питиримова</span>
               </label>
             </div>
-            <div className="form-control ">
-              <label className="label cursor-pointer gap-2 flex">
+            <div className="form-control gap-2 ">
+              <label className="label cursor-pointer gap-2 justify-normal">
                 <input
-                  value={1}
+                  value={0}
                   type="radio"
                   name="english"
-                  className="radio"
-                  checked
+                  className="radio checked:bg-orange-500"
                 />
-                <span className="label-text">Богданова</span>
+                <span className="label-text ">Богданова</span>
               </label>
             </div>
           </div>
@@ -55,25 +53,23 @@ export default function ConfigLocalstorage() {
           <p className="font-semibold text-xl">Казахский, Физика(лаб)</p>
           <div>
             <div className="form-control">
-              <label className="label cursor-pointer gap-2 flex">
+              <label className="label cursor-pointer gap-2 justify-normal">
                 <input
                   type="radio"
                   name="other"
-                  value={1}
-                  className="radio checked:bg-red-500"
-                  checked
+                  value={0}
+                  className="radio checked:bg-amber-500"
                 />
                 <span className="label-text">Конурова, Алдаберген</span>
               </label>
             </div>
             <div className="form-control ">
-              <label className="label cursor-pointer gap-2 flex">
+              <label className="label cursor-pointer gap-2 justify-normal">
                 <input
                   type="radio"
-                  value={0}
+                  value={1}
                   name="other"
-                  className="radio checked:bg-blue-500"
-                  checked
+                  className="radio checked:bg-emerald-500"
                 />
                 <span className="label-text">Оспангалиева, Кузнецова</span>
               </label>
@@ -83,7 +79,7 @@ export default function ConfigLocalstorage() {
 
         <button
           type="submit"
-          className="bg-blue-600 text-white p-2 rounded text-base self-center"
+          className="btn btn-outline btn-primary text-white p-2 rounded text-base self-center"
         >
           Обновить
         </button>

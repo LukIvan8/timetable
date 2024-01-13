@@ -230,7 +230,7 @@ export default function Home() {
                 })
                 .sort((a: any, b: any) => a.id - b.id)
                 .map((item, id) => {
-                  const uniqueKey = `${currentWeekday - 1}-${id}`;
+                  const uniqueKey = `${day}-${currentWeekday}-${id}`;
                   return (
                     <Class
                       {...item}
