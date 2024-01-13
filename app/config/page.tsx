@@ -6,103 +6,84 @@ export default function ConfigLocalstorage() {
   return (
     <main className="min-h-screen">
       <form
-        className="sm:w-[640px] sm:mx-auto flex flex-col gap-8 items-center justify-center h-[80dvh] text-lg"
+        className="sm:w-[320px] sm:mx-auto flex flex-col gap-8 items-start justify-center h-[80dvh] text-lg"
         onSubmit={(e) => {
           e.preventDefault();
           const english = e.currentTarget.elements.namedItem(
             "english"
           ) as RadioNodeList;
-          const kazakh = e.currentTarget.elements.namedItem(
-            "kazakh"
-          ) as RadioNodeList;
-          const ikt = e.currentTarget.elements.namedItem(
-            "ikt"
+          const other = e.currentTarget.elements.namedItem(
+            "other"
           ) as RadioNodeList;
           localStorage.setItem("english", english.value);
-          localStorage.setItem("kazakh", kazakh.value);
-          localStorage.setItem("ikt", ikt.value);
+          localStorage.setItem("kazakh", other.value);
+          localStorage.setItem("ikt", other.value);
           location.href = "/";
         }}
       >
-        <p className="font-black text-2xl">Выбор группы</p>
-        <div className="flex flex-col gap-2 justify-normal w-full">
-          <p className="self-center font-semibold">Казахский</p>
-          <div className="flex justify-evenly w-full">
-            <div className="flex gap-2 items-center">
-              <input
-                required
-                type="radio"
-                name="kazakh"
-                value={0}
-                className="w-4 h-4 accent-red-500"
-              />
-              <label>Конурова</label>
+        <p className="font-black text-2xl text-center w-full">Выбор группы</p>
+        <div className="flex flex-col items-start">
+          <p className="font-semibold text-xl">Английский</p>
+          <div>
+            <div className="form-control">
+              <label className="label cursor-pointer gap-2 flex">
+                <input
+                  type="radio"
+                  name="english"
+                  value={0}
+                  className="radio"
+                  checked
+                />
+                <span className="label-text">Питиримова</span>
+              </label>
             </div>
-            <div className="flex gap-2 items-center">
-              <input
-                required
-                type="radio"
-                name="kazakh"
-                value={1}
-                className="w-4 h-4 accent-red-500"
-              />
-              <label>Оспангалиева</label>
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-col gap-2 justify-normal w-full">
-          <p className="self-center font-semibold">Английский</p>
-          <div className="flex justify-evenly w-full">
-            <div className="flex gap-2 items-center">
-              <input
-                required
-                type="radio"
-                name="english"
-                value={0}
-                className="w-4 h-4 accent-blue-500 bg-white"
-              />
-              <label>Богданова</label>
-            </div>
-            <div className="flex gap-2 items-center">
-              <input
-                required
-                type="radio"
-                name="english"
-                value={1}
-                className="w-4 h-4 accent-blue-500 bg-white"
-              />
-              <label>Питиримова</label>
+            <div className="form-control ">
+              <label className="label cursor-pointer gap-2 flex">
+                <input
+                  value={1}
+                  type="radio"
+                  name="english"
+                  className="radio"
+                  checked
+                />
+                <span className="label-text">Богданова</span>
+              </label>
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-2 justify-normal w-full">
-          <p className="self-center font-semibold">ИКТ лабораторные</p>
-          <div className="flex justify-evenly w-full">
-            <div className="flex gap-2 items-center">
-              <input
-                required
-                type="radio"
-                name="ikt"
-                value={0}
-                className="w-4 h-4 accent-red-500"
-              />
-              <label>Мухамедиева</label>
+        <div className="flex flex-col items-start">
+          <p className="font-semibold text-xl">Казахский, Физика(лаб)</p>
+          <div>
+            <div className="form-control">
+              <label className="label cursor-pointer gap-2 flex">
+                <input
+                  type="radio"
+                  name="other"
+                  value={1}
+                  className="radio checked:bg-red-500"
+                  checked
+                />
+                <span className="label-text">Конурова, Алдаберген</span>
+              </label>
             </div>
-            <div className="flex gap-2 items-center">
-              <input
-                required
-                type="radio"
-                name="ikt"
-                value={1}
-                className="w-4 h-4 accent-red-500"
-              />
-              <label>Дуганова</label>
+            <div className="form-control ">
+              <label className="label cursor-pointer gap-2 flex">
+                <input
+                  type="radio"
+                  value={0}
+                  name="other"
+                  className="radio checked:bg-blue-500"
+                  checked
+                />
+                <span className="label-text">Оспангалиева, Кузнецова</span>
+              </label>
             </div>
           </div>
         </div>
+
         <button
           type="submit"
-          className="bg-blue-600 text-white p-2 rounded text-base"
+          className="bg-blue-600 text-white p-2 rounded text-base self-center"
         >
           Обновить
         </button>

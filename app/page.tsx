@@ -41,9 +41,9 @@ export default function Home() {
       dayjs(date.toDate().toDateString()).format("YYYY-MM-DD")
     ).week();
     if (week % 2 === 0) {
-      return 2;
+      return 1;
     }
-    return 1;
+    return 2;
   };
 
   const findNextClass = (currentDate: dayjs.Dayjs, subject: string) => {
@@ -102,9 +102,14 @@ export default function Home() {
   };
 
   const parsedTimetable = () => {
-    timetable.forEach((date) => {
-      date.forEach((subj) => {
-        if (subj.auditory.includes("/")) {
+    timetable.map((date) => {
+      date.map((subj) => {
+        console.log(subj.auditory);
+
+        if (
+          subj.auditory.includes("/") ||
+          (typeof subj.id === "string" && subj.id.includes("/"))
+        ) {
           const part = localStorage.getItem(
             subj.subject === "Английский"
               ? "english"
@@ -113,8 +118,13 @@ export default function Home() {
               : "ikt"
           );
           if (part !== null) {
-            subj.teacher = subj.teacher.split("/")[+part];
-            subj.auditory = subj.auditory.split("/")[+part];
+            if (typeof subj.id === "string") {
+              subj.id = subj.id.split("/")[+part];
+              subj.id = +subj.id;
+            } else {
+              subj.teacher = subj.teacher.split("/")[+part];
+              subj.auditory = subj.auditory.split("/")[+part];
+            }
           } else {
             redirect("/config");
           }
@@ -126,6 +136,7 @@ export default function Home() {
 
   useEffect(() => {
     parsedTimetable();
+    console.log(timetable);
     setWeekday(getWeekday());
     if (openControlsId) toggleControls(openControlsId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -167,10 +178,7 @@ export default function Home() {
           <Popover>
             <PopoverTrigger asChild>
               <div
-                className={`flex flex-col gap-1 h-14  items-center select-none cursor-pointer mx-auto sm:w-[298px] ${
-                  show &&
-                  "sm:border sm:border-white sm:rounded-t-md sm:border-b-0"
-                } `}
+                className={`flex flex-col gap-1 h-14  items-center select-none cursor-pointer mx-auto sm:w-[298px]`}
                 onClick={() => setShow((prev) => !prev)}
               >
                 <p className="font-semibold">
@@ -220,6 +228,7 @@ export default function Home() {
                 .filter((item) => {
                   if (!(item.variable === weekType(day))) return item;
                 })
+                .sort((a: any, b: any) => a.id - b.id)
                 .map((item, id) => {
                   const uniqueKey = `${currentWeekday - 1}-${id}`;
                   return (
@@ -255,7 +264,9 @@ export default function Home() {
               </div>
             )
           ) : (
-            <div className="self-center text-3xl font-bold">Выходной 🎊</div>
+            <div className="self-center text-3xl font-bold select-none">
+              Выходной 🎊
+            </div>
           )}
         </div>
       </div>

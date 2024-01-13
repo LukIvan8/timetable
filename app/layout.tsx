@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" prefix="og: http://ogp.me/ns#">
-      <body className={`${inter.className} bg-black text-white`}>
+      <body className={`${inter.className} bg-gray-950 text-white`}>
         {children}
       </body>
     </html>

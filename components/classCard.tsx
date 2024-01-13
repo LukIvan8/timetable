@@ -18,7 +18,7 @@ export default function Class({
   findPrevClass,
   toggleControls,
 }: TimetableElement & {
-  id: number;
+  id: number | string;
   findNextClass: (currentDate: dayjs.Dayjs, subject: string) => void;
   findPrevClass: (currentDate: dayjs.Dayjs, subject: string) => void;
   day: dayjs.Dayjs;
@@ -31,27 +31,27 @@ export default function Class({
   const color = {
     1: "red",
     2: "orange",
-    3: "yellow",
-    4: "green",
+    3: "amber",
+    4: "emerald",
   };
   const typeToColor = {
     lection: "bg-gray-200 text-gray-900",
     seminar: "bg-stone-700",
     kurh: "bg-gray-200 text-black",
-    lab: "bg-green-800",
+    lab: "bg-emerald-800",
   } as const;
   // Почему то tailwind не подхватывает наличие этих классов без этого
   const bgColor = {
     1: "bg-red-500",
     2: "bg-orange-500",
-    3: "bg-yellow-500",
-    4: "bg-green-500",
+    3: "bg-amber-500",
+    4: "bg-emerald-500",
   };
   const borderColor = {
     1: "border-red-500",
     2: "border-orange-500",
-    3: "border-yellow-500",
-    4: "border-green-500",
+    3: "border-amber-500",
+    4: "border-emerald-500",
   };
   const startTime = idToTime[id as keyof typeof idToTime].startTime;
   const endTime = idToTime[id as keyof typeof idToTime].endTime;
