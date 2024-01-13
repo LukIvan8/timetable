@@ -6,7 +6,7 @@ export default function ConfigLocalstorage() {
   return (
     <main className="min-h-screen">
       <form
-        className="sm:w-[320px] sm:mx-auto flex flex-col gap-8 items-start justify-center h-[80dvh] text-lg"
+        className="sm:w-[320px] w-9/12 mx-auto flex flex-col gap-8 items-start justify-center h-[80dvh] text-lg"
         onSubmit={(e) => {
           e.preventDefault();
           const english = e.currentTarget.elements.namedItem(
@@ -32,6 +32,7 @@ export default function ConfigLocalstorage() {
                   name="english"
                   value={1}
                   className="radio checked:bg-red-500"
+                  required
                 />
                 <span className="label-text">Питиримова</span>
               </label>
@@ -43,6 +44,7 @@ export default function ConfigLocalstorage() {
                   type="radio"
                   name="english"
                   className="radio checked:bg-orange-500"
+                  required
                 />
                 <span className="label-text ">Богданова</span>
               </label>
@@ -59,6 +61,7 @@ export default function ConfigLocalstorage() {
                   name="other"
                   value={0}
                   className="radio checked:bg-amber-500"
+                  required
                 />
                 <span className="label-text">Конурова, Алдаберген</span>
               </label>
@@ -70,6 +73,7 @@ export default function ConfigLocalstorage() {
                   value={1}
                   name="other"
                   className="radio checked:bg-emerald-500"
+                  required
                 />
                 <span className="label-text">Оспангалиева, Кузнецова</span>
               </label>
